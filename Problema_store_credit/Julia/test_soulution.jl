@@ -24,8 +24,9 @@
 
 ---------------------------------------------------------------------------=#
 include("./solution.jl")
-file_small = "/home/elsuizo/CodeJam/ProblemA_store_credit/A-ssmall-practice.in"
-file_medium = "/home/elsuizo/CodeJam/ProblemA_store_credit/A-small-practice.in"
+#file_small = "../Files/A-ssmall-practice.in" Porque no anda los paths relativos
+file_medium = "/home/elsuizo/CodeJam/Problema_store_credit/Files/A-small-practice.in"
+file_small = "/home/elsuizo/CodeJam/Problema_store_credit/Files/A-ssmall-practice.in"
 data = Credit.lines(file_medium)
 data_size = length(data)
 
@@ -39,3 +40,4 @@ for i = 2:3:data_size - 1
     push!(cases_vec, Credit.Cases(c, I, L))
 end
 
+Credit.filter_cases(cases_vec)

@@ -25,7 +25,6 @@
 ---------------------------------------------------------------------------=#
 
 module Credit
-
 """
 Type for encapsulate a test cases
 """
@@ -88,5 +87,21 @@ function create_cases(file_name::ASCIIString)
     return cases_vec
 end
 
-
+function filter_cases(cases::Array{Credit.Cases, 1})
+   for case in 1:length(cases)
+      size = cases[case].I
+      s = cases[case].c
+      for i in 1:size
+         for j in i:size
+            if(cases[case].L[i] + cases[case].L[j] == s)
+               println("index $i + index $j = credit $s")
+            end
+         end
+      end
+   end
+   
 end
+    
+end
+
+
