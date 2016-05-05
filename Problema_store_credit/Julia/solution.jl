@@ -93,8 +93,9 @@ function filter_cases(cases::Array{Credit.Cases, 1})
       s = cases[case].c
       for i in 1:size
          for j in i:size
-            if(cases[case].L[i] + cases[case].L[j] == s)
-               println("index $i + index $j = credit $s")
+            if((cases[case].L[i] + cases[case].L[j] == s) && i != j)
+               #println("index $i + index $j = credit $s")
+               println("Case #$case: $i  $j")
             end
          end
       end

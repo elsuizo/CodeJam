@@ -27,7 +27,8 @@ include("./solution.jl")
 #file_small = "../Files/A-ssmall-practice.in" Porque no anda los paths relativos
 file_medium = "/home/elsuizo/CodeJam/Problema_store_credit/Files/A-small-practice.in"
 file_small = "/home/elsuizo/CodeJam/Problema_store_credit/Files/A-ssmall-practice.in"
-data = Credit.lines(file_medium)
+file_large = "/home/elsuizo/CodeJam/Problema_store_credit/Files/A-large-practice.in"
+data = Credit.lines(file_large)
 data_size = length(data)
 
 re = r"\+?\d+" # regular expresion for find numbers
