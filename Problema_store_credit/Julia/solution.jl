@@ -87,6 +87,12 @@ function create_cases(file_name::ASCIIString)
     return cases_vec
 end
 
+"""
+Function for find the cases in that the credit is a sum of two items
+
+Input: cases(Array{Credit.Cases, 1})
+"""
+
 function filter_cases(cases::Array{Credit.Cases, 1})
    for case in 1:length(cases)
       size = cases[case].I
