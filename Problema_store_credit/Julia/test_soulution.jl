@@ -28,17 +28,7 @@ include("./solution.jl")
 file_medium = "/home/elsuizo/CodeJam/Problema_store_credit/Files/A-small-practice.in"
 file_small = "/home/elsuizo/CodeJam/Problema_store_credit/Files/A-ssmall-practice.in"
 file_large = "/home/elsuizo/CodeJam/Problema_store_credit/Files/A-large-practice.in"
-data = Credit.lines(file_large)
-data_size = length(data)
 
-re = r"\+?\d+" # regular expresion for find numbers
-number_of_cases = parse(Int, data[1])
-cases_vec = Vector{Credit.Cases}()
-for i = 2:3:data_size - 1
-    c = parse(Int, data[i]) 
-    I = parse(Int, data[i+1])
-    L = [parse(Int, s)  for s in matchall(re, data[i+2])] 
-    push!(cases_vec, Credit.Cases(c, I, L))
-end
+cases_vec = Credit.create_cases(file_large) 
 
 Credit.filter_cases(cases_vec)
