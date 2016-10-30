@@ -37,7 +37,6 @@ end
 """
 Function for returning the lines of text file
 """
-# NOTE(Abstractstring is not vim coloring)
 function read_file(str::AbstractString) 
     file = open(str)
     lines = eachline(file)
@@ -69,7 +68,7 @@ Example:
 --------
 `cases_vec = create_cases(file_name)`
 """
-function create_cases(file_name::ASCIIString)   
+function create_cases(file_name::String)
 
     data = Credit.lines(file_name)
     data_size = length(data)
@@ -78,7 +77,7 @@ function create_cases(file_name::ASCIIString)
     number_of_cases = parse(Int, data[1])
     cases_vec = Vector{Credit.Cases}()
     for i = 2:3:data_size - 1
-        c = parse(Int, data[i]) 
+        c = parse(Int, data[i])
         I = parse(Int, data[i+1])
         L = [parse(Int, s)  for s in matchall(re, data[i+2])] 
         push!(cases_vec, Credit.Cases(c, I, L))
@@ -106,9 +105,9 @@ function filter_cases(cases::Array{Credit.Cases, 1})
          end
       end
    end
-   
 end
-    
+
+
 end
 
 
