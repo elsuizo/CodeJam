@@ -6,3 +6,10 @@ Google CodeJam problems solves
 for test the solution and generate the file I use the unix pipe command like the following:
 
 `bash>julia CodeJam/Problema_store_credit/Julia/test_soulution.jl &> test.txt`
+
+## Reverse words Problem
+
+for test the solution and generate the file I use the unix pipe command like the following:
+
+
+`bash>julia CodeJam/Reverse_words/Julia/test_soulution.jl &> test.txt`
