@@ -1,7 +1,7 @@
 /* -------------------------------------------------------------------------
-@file main.c
+@file data.h
 
-@date 04/20/17 20:23:51
+@date 04/23/17 15:44:04
 @author Martin Noblia
 @email martin.noblia@openmailbox.org
 
@@ -22,33 +22,37 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 ---------------------------------------------------------------------------*/
+#ifndef DATA_H
+#define DATA_H
 /*-------------------------------------------------------------------------
- *                        TODO list
- *  - [X] Leer un archivo eficientemente
- *    - [ ] Leer el archivo con mmap(dicen que es mas eficiente)
- *  - [ ] Parsear los casos y crear los vectores de Credits
+ *                        includes
  -------------------------------------------------------------------------*/
 #include <stdio.h>
 #include <stdlib.h>
-#include "../inc/credit.h"
-#include "../inc/data.h"
+#include <inttypes.h>
+#include <string.h>
 
 /*-------------------------------------------------------------------------
- *                        main
+ *                        datatypes
  -------------------------------------------------------------------------*/
-int main (int argc, char** argv)
-{
-   struct Credit** ptr_vCredit;
-   uint32_t pool_size = 100;
-   credit_initialize_pool(ptr_vCredit, pool_size);
-   struct Credit* ptr_Credit;
-   ptr_Credit = credit_get_Credit_from_pool(ptr_vCredit, pool_size);
-   credit_initialize(ptr_Credit);
-   credit_return_Credit_to_pool(ptr_vCredit, ptr_Credit, pool_size);
-   char* path_small_data = "/home/elsuizo/CodeJam/Problema_store_credit/Files/A-ssmall-practice.in";
-   struct Data* data = {0};
-   data = read_Data(path_small_data);
-   print_Data_char(data);
+struct Data {
+   size_t size;
+   void* buffer;
+};
 
-   return 0;
-}
+/*-------------------------------------------------------------------------
+ *                        prototypes
+ -------------------------------------------------------------------------*/
+struct Data*
+make_Data(void* buffer, size_t size);
+
+void
+free_Data(struct Data* data);
+
+void
+print_Data_char(struct Data* data);
+
+struct Data*
+read_Data(char* filename);
+
+#endif
