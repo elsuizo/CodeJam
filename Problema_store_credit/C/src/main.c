@@ -38,17 +38,25 @@ You should have received a copy of the GNU General Public License
  -------------------------------------------------------------------------*/
 int main (int argc, char** argv)
 {
+   /* create a pool memory */
    struct Credit** ptr_vCredit;
-   uint32_t pool_size = 100;
+   const uint32_t pool_size = 100;
+   ptr_vCredit = malloc(sizeof(struct Credit*) * pool_size);
    credit_initialize_pool(ptr_vCredit, pool_size);
+   /* test for add a Credit in the pool */
    struct Credit* ptr_Credit;
    ptr_Credit = credit_get_Credit_from_pool(ptr_vCredit, pool_size);
    credit_initialize(ptr_Credit);
    credit_return_Credit_to_pool(ptr_vCredit, ptr_Credit, pool_size);
+   /*-------------------------------------------------------------------------
+    *                        load the data buffer
+    -------------------------------------------------------------------------*/
    char* path_small_data = "/home/elsuizo/CodeJam/Problema_store_credit/Files/A-ssmall-practice.in";
    struct Data* data = {0};
    data = read_Data(path_small_data);
    print_Data_char(data);
+   /* free the data buffer */
+   free_Data(data);
 
    return 0;
 }
