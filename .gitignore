@@ -1,5 +1,7 @@
 # ignore the bin folder
 bin/
+# ignore the outputs test files
+output
 # Object files
 *.o
 *.ko
