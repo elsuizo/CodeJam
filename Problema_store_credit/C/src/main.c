@@ -30,13 +30,22 @@ You should have received a copy of the GNU General Public License
  -------------------------------------------------------------------------*/
 #include <stdio.h>
 #include <stdlib.h>
-#include "../inc/credit.h"
+/* #include "../inc/credit.h" */
 #include "../inc/data.h"
 
 /*-------------------------------------------------------------------------
  *                        main
  -------------------------------------------------------------------------*/
-int main (int argc, char** argv)
+int main(void)
 {
+   char* file_ssmall_path = "/home/elsuizo/CodeJam/Problema_store_credit/Files/A-ssmall-practice.in";
+   struct Data data = read_Data(file_ssmall_path);
+   /* print_Data(&data); */
+   char* cursor = data.buffer;
+   /* int number_of_cases = atoi(*cursor); */
+   /* printf("the number of cases is: %d", number_of_cases); */
+   while (*cursor++) {
+      printf("%c", *(cursor + 1));
+   }
 
 }
