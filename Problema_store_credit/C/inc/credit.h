@@ -1,7 +1,7 @@
 /* -------------------------------------------------------------------------
-@file main.c
+@file credit.h
 
-@date 04/20/17 20:23:51
+@date 06/14/17 21:43:59
 @author Martin Noblia
 @email martin.noblia@openmailbox.org
 
@@ -22,31 +22,33 @@ General Public License for more details.
 
 You should have received a copy of the GNU General Public License
 ---------------------------------------------------------------------------*/
+#ifndef _CREDIT_H
+#define _CREDIT_H
 /*-------------------------------------------------------------------------
- *                        TODO list
- *  - [X] Leer un archivo eficientemente
- *    - [ ] Leer el archivo con mmap(dicen que es mas eficiente)
- *  - [ ] Parsear los casos y crear los vectores de Credits
+ *                        includes
  -------------------------------------------------------------------------*/
 #include <stdio.h>
 #include <stdlib.h>
-#include "../inc/credit.h"
+#include <string.h>
+/*-------------------------------------------------------------------------
+ *                        defines
+ -------------------------------------------------------------------------*/
+#define STEPSIZE 100
 
 /*-------------------------------------------------------------------------
- *                        main
+ *                        datatypes
  -------------------------------------------------------------------------*/
-int main(void)
-{
-   /* char* file_ssmall_path = "/home/elsuizo/Repos/CodeJam/Problema_store_credit/Files/A-ssmall-practice.in"; */
-   /* char* file_small_path = "/home/elsuizo/Repos/CodeJam/Problema_store_credit/Files/A-small-practice.in"; */
-   char* file_large = "/home/elsuizo/Repos/CodeJam/Problema_store_credit/Files/A-large-practice.in";
-   char** lines = credit_load_file(file_large);
-   struct Credits* credits = credit_create_cases(lines);
-   int number_elements = atoi(lines[0]);
-   /* printf("numero de creditos: %d", credits[0].credit); */
-   /* credit_show_credits(credits, number_elements); */
-   printf("Number of elements: %d\n", number_elements);
-   credit_filter_cases(credits, number_elements);
+struct Credits {
+   int credit;
+   int number_of_items;
+   int* elements;
+};
 
-   return(0);
-}
+char** credit_load_file(char* filename);
+
+struct Credits* credit_create_cases(char** lines);
+
+void credit_show_credits(struct Credits* c, int size);
+
+void credit_filter_cases(struct Credits* c, int size);
+#endif
