@@ -1,30 +1,58 @@
-struct Cases {
-    c:i32,
-    I:i32,
-    L:Vec<i32>
-}
+/// Solution of Google CodeJam Problem store credit in Rust
+use std::io::{BufRead, BufReader};
 use std::fs::File;
-use std::io::prelude::*;
-fn read_text_file(filename: &str) -> String {
 
-    let mut f = File::open(filename).expect("file not found");
-
-    let mut contents = String::new();
-    f.read_to_string(&mut contents).expect("something went wrong reading the file");
-    contents
+#[derive(Debug)]
+struct Credits {
+    credit: i32,
+    number_of_items: i32,
+    elements:Vec<i32>
 }
 
-// fn create_cases(file_name:&str) -> Vec<Cases> {
-//     data = read_text_file(file_name);
-//
-// }
+fn parse_numbers(line: &str) -> Vec<i32>
+{
+    let result: Vec<i32> = line.split_whitespace()
+                                .map(|s| s.parse().unwrap())
+                                .collect();
+    result
+}
 
+fn parse_number(line: &str) -> i32 {
+    line.parse().unwrap()
+}
+
+fn read_file_to_vector(file_path: &str) -> Vec<Credits>
+{
+    let file = BufReader::new(File::open(file_path).unwrap());
+    let lines: Vec<String> = file.lines().skip(1).map(|line| { line.unwrap() }).collect();
+    let mut credit_vec: Vec<Credits> = Vec::new();
+    for cases in lines.chunks(3) {
+        let credit = Credits {credit: parse_number(&cases[0]),
+                              number_of_items: parse_number(&cases[1]),
+                              elements: parse_numbers(&cases[2])};
+        credit_vec.push(credit);
+    }
+    credit_vec
+}
+
+fn solve_case(case: &Credits) -> (i32, i32) {
+
+    for num in 0..case.number_of_items{
+        for index in num..case.number_of_items {
+            if case.elements[num as usize] + case.elements[index as usize] == case.credit && num != index {
+                return (num, index);
+            }
+        }
+    }
+    unreachable!()
+}
 
 fn main() {
-    let filename = "../Files/A-ssmall-practice.in";
-    // let mut contents = String::new();
-    let contents = read_text_file(filename);
-    println!("{}", contents);
-    println!("{}", contents.chars().nth(2).unwrap());
+    let file_path = "../Files/A-small-practice.in";
+    let cases = read_file_to_vector(file_path);
+    for (index, case) in cases.iter().enumerate() {
+        let (x, y) = solve_case(&case);
+        println!("Case#:{} {} {}", index, x, y);
+    }
 
 }
